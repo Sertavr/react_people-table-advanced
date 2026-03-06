@@ -76,8 +76,13 @@ export const PeoplePage = () => {
     }
 
     if (query) {
-      newListPersons = newListPersons.filter(person =>
-        person.name.toLowerCase().includes(query.toLowerCase()),
+      newListPersons = newListPersons.filter(
+        person =>
+          person.name.toLowerCase().includes(query.toLowerCase()) ||
+          (person.fatherName &&
+            person.fatherName.toLowerCase().includes(query.toLowerCase())) ||
+          (person.motherName &&
+            person.motherName.toLowerCase().includes(query.toLowerCase())),
       );
     }
 

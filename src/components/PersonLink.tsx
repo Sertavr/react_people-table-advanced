@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { normalizeSlug } from '../helper/functionHelp';
 import { Person } from '../types';
 import classNames from 'classnames';
@@ -8,13 +8,15 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
+  const [searchParams] = useSearchParams();
+
   if (!person) {
     return;
   }
 
   return (
     <Link
-      to={`/people/${normalizeSlug(person?.name)}-${person?.born}`}
+      to={`/people/${normalizeSlug(person?.name)}-${person?.born}?${searchParams}`}
       className={classNames({ 'has-text-danger': person?.sex === 'f' })}
     >
       {person?.name}
