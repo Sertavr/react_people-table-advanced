@@ -129,11 +129,11 @@ export const PeoplePage = () => {
                 </p>
               )}
 
-              {preparePersons().length === 0 && (
+              {persons.length > 0 && preparePersons().length === 0 && (
                 <p>There are no people matching the current search criteria</p>
               )}
 
-              {persons.length !== 0 && preparePersons().length !== 0 && (
+              {persons.length > 0 && preparePersons().length > 0 && (
                 <PeopleTable persons={preparePersons()} />
               )}
             </div>
