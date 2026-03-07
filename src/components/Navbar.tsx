@@ -1,7 +1,9 @@
 import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const Navbar = () => {
+  const { search } = useLocation();
+  console.log(location);
   const getClassName = ({ isActive }: { isActive: boolean }) => {
     return classNames('navbar-item', {
       'has-background-grey-lighter': isActive,
@@ -21,7 +23,11 @@ export const Navbar = () => {
             Home
           </NavLink>
 
-          <NavLink aria-current="page" className={getClassName} to="people">
+          <NavLink
+            aria-current="page"
+            className={getClassName}
+            to={`people${search}`}
+          >
             People
           </NavLink>
         </div>
