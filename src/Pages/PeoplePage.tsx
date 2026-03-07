@@ -2,7 +2,7 @@
 import { PeopleTable } from '../Pages/PeopleTable';
 import { Loader } from '../components/Loader';
 import { getPeople } from '../api/data';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Person } from '../types';
 import { useSearchParams } from 'react-router-dom';
 import { PeopleFilters } from '../components/PeopleFilters';
@@ -45,13 +45,12 @@ export const PeoplePage = () => {
       .finally(() => setLoader(false));
   }, []);
 
-  const preparePersons = () => {
+  const preparePersons = useMemo(() => {
     const order = searchParams.get('order');
     const sort = searchParams.get('sort') as keyof Person;
     const sex = searchParams.get('sex');
     const query = searchParams.get('query');
     const centuries = searchParams.getAll('centuries') || [];
-
     let newListPersons = [...persons];
 
     function callbackSort(a: Person, b: Person) {
@@ -101,7 +100,7 @@ export const PeoplePage = () => {
     }
 
     return newListPersons;
-  };
+  }, [persons, searchParams]);
 
   return (
     <>
@@ -129,12 +128,12 @@ export const PeoplePage = () => {
                 </p>
               )}
 
-              {persons.length > 0 && preparePersons().length === 0 && (
+              {persons.length > 0 && preparePersons.length === 0 && (
                 <p>There are no people matching the current search criteria</p>
               )}
 
-              {persons.length > 0 && preparePersons().length > 0 && (
-                <PeopleTable persons={preparePersons()} />
+              {persons.length > 0 && preparePersons.length > 0 && (
+                <PeopleTable persons={preparePersons} />
               )}
             </div>
           </div>
