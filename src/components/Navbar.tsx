@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 export const Navbar = () => {
   const { search } = useLocation();
-  console.log(location);
+
   const getClassName = ({ isActive }: { isActive: boolean }) => {
     return classNames('navbar-item', {
       'has-background-grey-lighter': isActive,

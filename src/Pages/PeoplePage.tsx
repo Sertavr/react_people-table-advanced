@@ -1,11 +1,11 @@
 // import { PeopleFilters } from './PeopleFilters';
 import { PeopleTable } from '../Pages/PeopleTable';
 import { Loader } from '../components/Loader';
-import { getPeople } from '../api/data';
 import { useEffect, useMemo, useState } from 'react';
 import { Person } from '../types';
 import { useSearchParams } from 'react-router-dom';
 import { PeopleFilters } from '../components/PeopleFilters';
+import { getPeople } from '../api';
 
 export const PeoplePage = () => {
   const [persons, setPersons] = useState<Person[]>([]);
